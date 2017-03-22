@@ -69,4 +69,10 @@ Vagrant.configure("2") do |config|
   #   apt-get update
   #   apt-get install -y apache2
   # SHELL
+
+  # Run Ansible from the Vagrant VM
+  config.vm.provision "ansible_local" do |ansible|
+    ansible.provisioning_path = "/vagrant/ansible"
+    ansible.playbook = "playbook.yaml"
+  end
 end

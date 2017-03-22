@@ -1,0 +1,5 @@
+# touch a file, using symbolic modes to set the permissions (equivalent to 0644)
+- file:
+    path: /etc/craig-foo.conf
+    state: touch
+    mode: "u=rw,g=r,o=r"
