@@ -1,5 +1,7 @@
-# touch a file, using symbolic modes to set the permissions (equivalent to 0644)
-- file:
-    path: /etc/craig-foo.conf
-    state: touch
-    mode: "u=rw,g=r,o=r"
+---
+- hosts: all
+  pre_tasks:
+    - name: run ansible galaxy
+      local_action: command sudo ansible-galaxy install -r requirements.yaml
+  roles:
+    - role: gantsign.visual-studio-code
