@@ -1,7 +1,28 @@
 ---
 - hosts: all
   pre_tasks:
-    - name: run ansible galaxy
+    - name: install required roles from ansible galaxy
       local_action: command sudo ansible-galaxy install -r requirements.yaml
-  roles:
-    - role: gantsign.visual-studio-code
+
+  tasks:
+    - name: install visual studio
+      static: no
+      include_role: 
+        name: gantsign.visual-studio-code
+
+  post_tasks:
+    - name: fix for https://github.com/Microsoft/vscode/issues/13799
+      local_action: > 
+        command sudo sed -i  
+        's~
+        Exec=/usr/share/code/code --unity-launch %U~
+        Exec=/usr/share/code/code --disable-gpu  --unity-launch %U~
+        g'
+        /usr/share/applications/code.desktop
+
+    - name: hide ubuntu launcher
+      local_action: >
+        command gsettings set 
+        org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ 
+        launcher-hide-mode 
+        1
