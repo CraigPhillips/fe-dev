@@ -13,6 +13,8 @@ Vagrant.configure("2") do |config|
   # boxes at https://atlas.hashicorp.com/search.
   # Desktop Ubuntu 16.10 (Yakkety Yak)
   config.vm.box = "boxcutter/ubuntu1610-desktop"
+  # Allows for forwarding of SSH keys from host for accessing Github
+  config.ssh.forward_agent = true
 
   # Parameters for the environment being created
   config.vm.provider "virtualbox" do |vb|

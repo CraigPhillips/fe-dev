@@ -30,6 +30,13 @@
             "editor.tabsize": 2
           }
 
+    - name: register github.com as a known host
+      known_hosts:
+        path: /etc/ssh/ssh_known_hosts
+        name: github.com
+        key: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
+      become: true
+
   post_tasks:
     - name: fix for https://github.com/Microsoft/vscode/issues/13799
       lineinfile:
