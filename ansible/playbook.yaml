@@ -6,16 +6,22 @@
       become: true
 
   tasks:
+    - name: install chrome
+      static: no
+      include_role:
+        name: cmprescott.chrome
+      become: true
+      
     - name: install node
       static: no
       include_role:
         name: geerlingguy.nodejs
       become: true
 
-    - name: install chrome
+    - name: install terminator
       static: no
       include_role:
-        name: cmprescott.chrome
+        name: vcabourdin.terminator
       become: true
 
     - name: install visual studio
