@@ -2,23 +2,41 @@
 - hosts: all
   pre_tasks:
     - name: install required roles from ansible galaxy
-      local_action: command sudo ansible-galaxy install -r requirements.yaml
+      local_action: command ansible-galaxy install -r required-roles.yaml
+      become: true
 
   tasks:
+    - name: install node
+      static: no
+      include_role:
+        name: geerlingguy.nodejs
+      become: true
+
+    - name: install chrome
+      static: no
+      include_role:
+        name: cmprescott.chrome
+      become: true
+
     - name: install visual studio
       static: no
       include_role: 
         name: gantsign.visual-studio-code
+      vars:
+        users:
+        - username: vagrant
+          visual_studio_code_settings: {
+            "editor.rulers": [80],
+            "editor.tabsize": 2
+          }
 
   post_tasks:
     - name: fix for https://github.com/Microsoft/vscode/issues/13799
-      local_action: > 
-        command sudo sed -i  
-        's~
-        Exec=/usr/share/code/code --unity-launch %U~
-        Exec=/usr/share/code/code --disable-gpu  --unity-launch %U~
-        g'
-        /usr/share/applications/code.desktop
+      lineinfile:
+        dest: /usr/share/applications/code.desktop
+        regexp: Exec=/usr/share/code/code --unity-launch %U
+        line: Exec=/usr/share/code/code --disable-gpu --unity-launch %U
+      become: true
 
     - name: hide ubuntu launcher
       local_action: >
