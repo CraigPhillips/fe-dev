@@ -51,3 +51,11 @@
         org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ 
         launcher-hide-mode 
         1
+
+    - name: disable ubuntu auto blackout
+      local_action:
+        command gsettings set org.gnome.desktop.session idle-delay 0
+
+    - name: disable ubuntu autolock
+      local_action: >
+        command gsettings set org.gnome.desktop.screensaver lock-enabled false
