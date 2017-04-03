@@ -43,6 +43,13 @@
         key: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
       become: true
 
+    - name: register bitbucket.org as a known host
+      known_hosts:
+        path: /etc/ssh/ssh_known_hosts
+        name: bitbucket.org
+        key: "{{ lookup('pipe', 'ssh-keyscan -t rsa bitbucket.org') }}"
+      become: true
+
   post_tasks:
     - name: fix for https://github.com/Microsoft/vscode/issues/13799
       lineinfile:

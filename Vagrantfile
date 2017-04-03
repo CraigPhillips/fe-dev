@@ -1,5 +1,8 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
+  
+$hkey = "~/.ssh/id_rsa"
+$gkey = "/home/vagrant/.ssh/id_rsa"
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
@@ -9,12 +12,15 @@
 # For a complete reference, please see the online documentation at
 # https://docs.vagrantup.com.
 Vagrant.configure("2") do |config|
+
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
+  
   # Desktop Ubuntu 16.10 (Yakkety Yak)
   config.vm.box = "boxcutter/ubuntu1610-desktop"
-  # Allows for forwarding of SSH keys from host for accessing Github
-  config.ssh.forward_agent = true
+
+  # Shares SSH keys with guest
+  config.vm.provision "file", source: $hkey, destination: $gkey
 
   # Parameters for the environment being created
   config.vm.provider "virtualbox" do |vb|
