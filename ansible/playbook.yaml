@@ -6,6 +6,14 @@
       become: true
 
   tasks:
+    - file:
+        src: /tmp/id_rsa
+        dest: /home/vagrant/.ssh/id_rsa
+        owner: vagrant
+        group: vagrant
+        mode: 0600
+      become: true
+
     - name: install chrome
       static: no
       include_role:
@@ -35,27 +43,19 @@
             "editor.rulers": [80],
             "editor.tabsize": 2
           }
+      
+    - name: fix for https://github.com/Microsoft/vscode/issues/13799
+      lineinfile:
+        dest: /usr/share/applications/code.desktop
+        regexp: Exec=/usr/share/code/code --unity-launch %U
+        line: Exec=/usr/share/code/code --disable-gpu --unity-launch %U
+      become: true
 
     - name: register github.com as a known host
       known_hosts:
         path: /etc/ssh/ssh_known_hosts
         name: github.com
         key: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
-      become: true
-
-    - name: register bitbucket.org as a known host
-      known_hosts:
-        path: /etc/ssh/ssh_known_hosts
-        name: bitbucket.org
-        key: "{{ lookup('pipe', 'ssh-keyscan -t rsa bitbucket.org') }}"
-      become: true
-
-  post_tasks:
-    - name: fix for https://github.com/Microsoft/vscode/issues/13799
-      lineinfile:
-        dest: /usr/share/applications/code.desktop
-        regexp: Exec=/usr/share/code/code --unity-launch %U
-        line: Exec=/usr/share/code/code --disable-gpu --unity-launch %U
       become: true
 
     - name: hide ubuntu launcher
