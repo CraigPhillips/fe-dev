@@ -6,12 +6,16 @@
       become: true
 
   tasks:
-    - file:
-        src: /tmp/id_rsa
-        dest: /home/vagrant/.ssh/id_rsa
-        owner: vagrant
-        group: vagrant
-        mode: 0600
+    - name: ubuntu settings
+      include: ubuntu-settings.yaml
+
+    - name: get status of copied in SSH key file
+      stat: path=/tmp/id_rsa
+      register: ssh_key_status
+
+    - name: move SSH key file into place
+      local_action: command mv /tmp/id_rsa /home/vagrant/.ssh/id_rsa
+      when: ssh_key_status.stat.exists
       become: true
 
     - name: install chrome
@@ -57,18 +61,3 @@
         name: github.com
         key: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
       become: true
-
-    - name: hide ubuntu launcher
-      local_action: >
-        command gsettings set 
-        org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ 
-        launcher-hide-mode 
-        1
-
-    - name: disable ubuntu auto blackout
-      local_action:
-        command gsettings set org.gnome.desktop.session idle-delay 0
-
-    - name: disable ubuntu autolock
-      local_action: >
-        command gsettings set org.gnome.desktop.screensaver lock-enabled false
