@@ -3,6 +3,10 @@
   
 $hkey = "~/.ssh/id_rsa"
 $gkeystage = "/tmp/id_rsa"
+$awscrd = "~/.aws/credentials"
+$awscrds = "/tmp/.aws/credentials"
+$awscfg = "~/.aws/config"
+$awscfgs = "/tmp/.aws/config"
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
@@ -27,6 +31,10 @@ Vagrant.configure("2") do |config|
 
   # Shares SSH keys with guest
   config.vm.provision "file", source: $hkey, destination: $gkeystage
+
+  # Shares AWS settings wit guest
+  config.vm.provision "file", source: $awscrd, destination: $awscrds
+  config.vm.provision "file", source: $awscfg, destination: $awscfgs
 
   # Run Ansible from the Vagrant VM
   config.vm.provision "ansible_local" do |ansible|

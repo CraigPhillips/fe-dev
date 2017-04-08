@@ -10,36 +10,68 @@
       include: ubuntu-settings.yaml
 
     - name: get status of copied in SSH key file
-      stat: path=/tmp/id_rsa
       register: ssh_key_status
+      stat: path=/tmp/id_rsa
 
     - name: move SSH key file into place
-      local_action: command mv /tmp/id_rsa /home/vagrant/.ssh/id_rsa
-      when: ssh_key_status.stat.exists
       become: true
+      local_action: command cp /tmp/id_rsa /home/vagrant/.ssh/id_rsa
+      when: ssh_key_status.stat.exists
+
+    - name: set permissions on SSH key file
+      become: true
+      local_action: command chmod 400 /home/vagrant/.ssh/id_rsa
+      when: ssh_key_status.stat.exists
+
+    - name: get status of copied AWS settings
+      register: aws_settings_status
+      stat: path=/tmp/.aws
+
+    - name: install AWS CLI
+      become: true
+      include_role:
+        name: ssilab.aws-cli
+      static: no
+      vars:
+        - aws_output_format: json
+        - aws_region: us-west-2
+        - aws_access_key_id: FAKE_PLACEHOLDER
+        - aws_secrete_access_key: FAKE_PLACEHOLDER
+      when: aws_settings_status.stat.exists
+
+    - name: move AWS CLI credentials into place
+      become: true
+      local_action: command cp -R /tmp/.aws/credentials /home/vagrant/.aws/credentials
+      when: aws_settings_status.stat.exists
+
+    - name: move AWS CLI settings into place
+      become: true
+      local_action: command cp -R /tmp/.aws/config /home/vagrant/.aws/config
+      when: aws_settings_status.stat.exists
 
     - name: install chrome
-      static: no
+      become: true
       include_role:
         name: cmprescott.chrome
-      become: true
+      static: no
       
     - name: install node
-      static: no
+      become: true
       include_role:
         name: geerlingguy.nodejs
-      become: true
+      static: no
 
     - name: install terminator
-      static: no
+      become: true
       include_role:
         name: vcabourdin.terminator
-      become: true
+      static: no
 
     - name: install visual studio
-      static: no
+      become: true
       include_role: 
         name: gantsign.visual-studio-code
+      static: no
       vars:
         users:
         - username: vagrant
@@ -49,15 +81,15 @@
           }
       
     - name: fix for https://github.com/Microsoft/vscode/issues/13799
+      become: true
       lineinfile:
         dest: /usr/share/applications/code.desktop
-        regexp: Exec=/usr/share/code/code --unity-launch %U
         line: Exec=/usr/share/code/code --disable-gpu --unity-launch %U
-      become: true
+        regexp: Exec=/usr/share/code/code --unity-launch %U
 
     - name: register github.com as a known host
+      become: true
       known_hosts:
+        key: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
         path: /etc/ssh/ssh_known_hosts
         name: github.com
-        key: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
-      become: true
