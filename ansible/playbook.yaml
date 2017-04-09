@@ -13,14 +13,12 @@
       register: ssh_key_status
       stat: path=/tmp/id_rsa
 
-    - name: move SSH key file into place
-      become: true
-      local_action: command cp /tmp/id_rsa /home/vagrant/.ssh/id_rsa
-      when: ssh_key_status.stat.exists
-
-    - name: set permissions on SSH key file
-      become: true
-      local_action: command chmod 400 /home/vagrant/.ssh/id_rsa
+    - copy:
+        src: /tmp/id_rsa
+        dest: /home/vagrant/.ssh/id_rsa
+        owner: vagrant
+        mode: 0400
+      name: move SSH key file into place
       when: ssh_key_status.stat.exists
 
     - name: get status of copied AWS settings
@@ -39,14 +37,20 @@
         - aws_secrete_access_key: FAKE_PLACEHOLDER
       when: aws_settings_status.stat.exists
 
-    - name: move AWS CLI credentials into place
-      become: true
-      local_action: command cp -R /tmp/.aws/credentials /home/vagrant/.aws/credentials
+    - copy:
+        src: /tmp/.aws/credentials
+        dest: /home/vagrant/.aws/credentials
+        owner: vagrant
+        mode: 0400
+      name: move AWS CLI credentials into place
       when: aws_settings_status.stat.exists
 
-    - name: move AWS CLI settings into place
-      become: true
-      local_action: command cp -R /tmp/.aws/config /home/vagrant/.aws/config
+    - copy:
+        src: /tmp/.aws/config
+        dest: /home/vagrant/.aws/config
+        owner: vagrant
+        mode: 0400
+      name: move AWS CLI config into place
       when: aws_settings_status.stat.exists
 
     - name: install chrome
