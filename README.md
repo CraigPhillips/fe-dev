@@ -8,8 +8,8 @@ To use VM:
     https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/
 
 4) Add SSH key to any other sites where it is needed (such as other Git hosts?)
-5) Create AWS credentials and config files in your user directory's .aws file.
-Either manually adding them or by installing and configuring the AWS CLI as 
+5) Create AWS credentials and config files in your user directory's .aws folder.
+Either by manually adding them or by installing and configuring the AWS CLI as 
 described here:
 
   http://docs.aws.amazon.com/cli/latest/userguide/installing.html
