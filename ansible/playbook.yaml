@@ -21,13 +21,6 @@
       name: move SSH key file into place
       when: ssh_key_status.stat.exists
 
-    - copy:
-        src: /vagrant/files/ssh.config
-        dest: /home/vagrant/.ssh/config
-        owner: vagrant
-        mode: 0700
-      name: adds custom Bash profile
-
     - name: get status of copied AWS settings
       register: aws_settings_status
       stat: path=/tmp/.aws
