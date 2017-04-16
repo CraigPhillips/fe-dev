@@ -2,5 +2,6 @@
 - src: cmprescott.chrome
 - src: gantsign.visual-studio-code
 - src: geerlingguy.nodejs
-- src: ssilab.aws-cli
+- src: kbrebanov.dkms
 - src: vcabourdin.terminator
+- src: ypsman.aws-cli

@@ -32,16 +32,8 @@
       register: aws_settings_status
       stat: path=/tmp/.aws
 
-    - name: install AWS CLI
-      become: true
-      include_role:
-        name: ssilab.aws-cli
-      static: no
-      vars:
-        - aws_output_format: json
-        - aws_region: us-west-2
-        - aws_access_key_id: FAKE_PLACEHOLDER
-        - aws_secrete_access_key: FAKE_PLACEHOLDER
+    - file: path=/home/vagrant/.aws state=directory
+      name: Ensures AWS config directory exists
       when: aws_settings_status.stat.exists
 
     - copy:
@@ -50,6 +42,13 @@
         owner: vagrant
         mode: 0400
       name: move AWS CLI credentials into place
+      when: aws_settings_status.stat.exists
+
+    - name: install AWS CLI
+      become: true
+      include_role:
+        name: ypsman.aws-cli
+      static: no
       when: aws_settings_status.stat.exists
 
     - copy:
@@ -64,6 +63,12 @@
       become: true
       include_role:
         name: cmprescott.chrome
+      static: no
+
+    - name: install dkms (guest-side part of time synching)
+      become: true
+      include_role:
+        name: kbrebanov.dkms
       static: no
       
     - name: install node
