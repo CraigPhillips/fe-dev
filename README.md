@@ -16,14 +16,18 @@ described here:
 
 The `~/.aws/credentials` file should look like:
 
-```[default]
+```
+[default]
 aws_access_key_id = YOUR_ACCESS_KEY
-aws_secret_access_key = YOUR_SECRET_ACCESS_KEY```
+aws_secret_access_key = YOUR_SECRET_ACCESS_KEY
+```
 
 The  `~/.aws/config` file should look like:
 
-```[default]
-region = your-aws-region```
+```
+[default]
+region = your-aws-region
+```
 
 4) Run `vagrant plugin install vagrant-vbguest` which keeps guest additions
 up to date when running `vagrant up`.
