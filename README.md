@@ -29,6 +29,6 @@ The  `~/.aws/config` file should look like:
 region = your-aws-region
 ```
 
-4) Run `vagrant plugin install vagrant-vbguest` which keeps guest additions
-up to date when running `vagrant up`
-5) Run `vagrant up`
+6) Run `vagrant plugin install vagrant-vbguest` which keeps Virtual Box Guest 
+Additions up to date when running `vagrant up`
+7) Run `vagrant up`
