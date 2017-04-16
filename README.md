@@ -30,5 +30,5 @@ region = your-aws-region
 ```
 
 4) Run `vagrant plugin install vagrant-vbguest` which keeps guest additions
-up to date when running `vagrant up`.
+up to date when running `vagrant up`
 5) Run `vagrant up`
