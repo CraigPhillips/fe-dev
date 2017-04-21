@@ -7,8 +7,13 @@ To use VM:
 
     https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/
 
-4) Add SSH key to any other sites where it is needed (such as other Git hosts?)
-5) Create AWS credentials and config files in your user directory's .aws folder.
+4) Run git config commands:
+
+  git config --global user.email "youremail@host.com"
+  git config --global user.name "Your Display Name"
+
+5) Add SSH key to any other sites where it is needed (such as other Git hosts?)
+6) Create AWS credentials and config files in your user directory's .aws folder.
 Either by manually adding them or by installing and configuring the AWS CLI as 
 described here:
 
@@ -29,6 +34,6 @@ The  `~/.aws/config` file should look like:
 region = your-aws-region
 ```
 
-6) Run `vagrant plugin install vagrant-vbguest` which keeps Virtual Box Guest 
+7) Run `vagrant plugin install vagrant-vbguest` which keeps Virtual Box Guest 
 Additions up to date when running `vagrant up`
-7) Run `vagrant up`
+8) Run `vagrant up`

@@ -102,3 +102,15 @@
         key: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
         path: /etc/ssh/ssh_known_hosts
         name: github.com
+
+    - name: get status of copied Git settings
+      register: git_key_status
+      stat: path=/tmp/.gitconfig
+    
+    - copy:
+        src: /tmp/.gitconfig
+        dest: /home/vagrant/.gitconfig
+        owner: vagrant
+        mode: 0700
+      name: move Git config into place
+      when: git_key_status.stat.exists
