@@ -41,6 +41,9 @@ Vagrant.configure("2") do |config|
   config.vm.provision "file", source: $awscrd, destination: $awscrds
   config.vm.provision "file", source: $awscfg, destination: $awscfgs
 
+  # Maps local user directory to guest folder for easy file transfer
+  config.vm.synced_folder "~", "/host-home"
+
   # Run Ansible from the Vagrant VM
   config.vm.provision "ansible_local" do |ansible|
     ansible.provisioning_path = "/vagrant/ansible"
