@@ -86,7 +86,7 @@
         - username: vagrant
           visual_studio_code_settings: {
             "editor.insertSpaces": true,
-            "editor.rulers": [80],
+            "editor.rulers": [80, 100],
             "editor.tabSize": 2,
             "files.eol": "\n"
           }
