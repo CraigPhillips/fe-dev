@@ -2,8 +2,8 @@
 - hosts: all
   pre_tasks:
     - name: install required roles from ansible galaxy
-      local_action: command ansible-galaxy install -r required-roles.yaml
       become: true
+      local_action: command ansible-galaxy install -r required-roles.yaml
 
   tasks:
     - name: ubuntu settings
@@ -116,3 +116,6 @@
         mode: 0700
       name: move Git config into place
       when: git_key_status.stat.exists
+
+    - name: install git kraken
+      include: git-kraken.yaml

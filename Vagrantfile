@@ -47,7 +47,6 @@ Vagrant.configure("2") do |config|
 
   # Maps local user directory to guest folder for easy file transfer
   config.vm.synced_folder "~", "/host-home"
-  config.vm.synced_folder "Z:/", "/z"
 
   # Run Ansible from the Vagrant VM
   config.vm.provision "ansible_local" do |ansible|

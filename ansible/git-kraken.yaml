@@ -1,0 +1,11 @@
+---
+- name: download git kraken
+  become: true
+  get_url:
+    url: https://release.gitkraken.com/linux/gitkraken-amd64.deb
+    dest: /install/gitkraken-amd64.deb
+
+- name: install git kraken
+  become: true
+  apt:
+    deb: /install/gitkraken-amd64.deb
