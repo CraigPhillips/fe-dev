@@ -5,10 +5,10 @@ $awscrd = "~/.aws/credentials"
 $awscrds = "/tmp/.aws/credentials"
 $awscfg = "~/.aws/config"
 $awscfgs = "/tmp/.aws/config"
-$hkey = "~/.ssh/id_rsa"
+$sshkey = "~/.ssh/id_rsa"
+$sshkeys = "/tmp/id_rsa"
 $gitkey= "~/.gitconfig"
 $gitkeys= "/tmp/.gitconfig"
-$gkeystage = "/tmp/id_rsa"
 
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
@@ -28,11 +28,15 @@ Vagrant.configure("2") do |config|
 
   # Parameters for the environment being created
   config.vm.provider "virtualbox" do |vb|
-    vb.customize ["modifyvm", :id, "--memory", "4096", "--cpus", "2"]
+    vb.customize ["modifyvm", :id, 
+      "--memory", "4096", 
+      "--cpus", "2",
+      "--monitorcount", "2"
+    ]
   end
 
   # Shares SSH keys with guest
-  config.vm.provision "file", source: $hkey, destination: $gkeystage
+  config.vm.provision "file", source: $sshkey, destination: $sshkeys
 
   # Shares Git config with guest
   config.vm.provision "file", source: $gitkey, destination: $gitkeys
@@ -43,6 +47,7 @@ Vagrant.configure("2") do |config|
 
   # Maps local user directory to guest folder for easy file transfer
   config.vm.synced_folder "~", "/host-home"
+  config.vm.synced_folder "Z:/", "/z"
 
   # Run Ansible from the Vagrant VM
   config.vm.provision "ansible_local" do |ansible|
