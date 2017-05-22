@@ -116,6 +116,3 @@
         mode: 0700
       name: move Git config into place
       when: git_key_status.stat.exists
-
-    - name: install git kraken
-      include: git-kraken.yaml
