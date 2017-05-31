@@ -86,10 +86,10 @@
         - username: vagrant
           visual_studio_code_extensions:
             - "dbaeumer.vscode-eslint"
-            - "regex"
+            - "chrmarti.regex"
             - "streetsidesoftware.code-spell-checker"
-            - "vscode-icons"
-            - "vscode-versionlens"
+            - "robertohuertasm.vscode-icons"
+            - "pflannery.vscode-versionlens"
           visual_studio_code_settings: {
             "cSpell.userWords": [
               "babili",
@@ -118,7 +118,9 @@
 
             "terminal.integrated.fontSize": 12,
 
-            "window.newWindowDimensions": "fullscreen"
+            "window.newWindowDimensions": "fullscreen",
+
+            "workbench.iconTheme": "vscode-icons"
           }
       
     - name: fix for https://github.com/Microsoft/vscode/issues/13799
