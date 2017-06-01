@@ -89,7 +89,6 @@
             - "chrmarti.regex"
             - "streetsidesoftware.code-spell-checker"
             - "robertohuertasm.vscode-icons"
-            - "pflannery.vscode-versionlens"
           visual_studio_code_settings: {
             "cSpell.userWords": [
               "babili",
