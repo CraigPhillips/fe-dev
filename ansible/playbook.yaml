@@ -91,6 +91,7 @@
             - "robertohuertasm.vscode-icons"
           visual_studio_code_settings: {
             "cSpell.userWords": [
+              "amazonaws",
               "babili",
               "bitbucket",
               "cloudformation",
@@ -98,7 +99,8 @@
               "fullscreen",
               "gitignore",
               "oris",
-              "myresearch"
+              "myresearch",
+              "SDK's'"
             ],
 
             "editor.autoClosingBrackets": false,
