@@ -100,7 +100,8 @@
               "gitignore",
               "oris",
               "myresearch",
-              "SDK's'"
+              "SDK's'",
+              "serverless"
             ],
 
             "editor.autoClosingBrackets": false,
