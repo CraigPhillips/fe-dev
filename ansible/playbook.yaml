@@ -98,14 +98,16 @@
               "fullscreen",
               "gitignore",
               "oris",
+              "minimap",
               "myresearch",
-              "SDK's'",
+              "SDK's",
               "serverless"
             ],
 
             "editor.autoClosingBrackets": false,
             "editor.fontSize": 12,
             "editor.insertSpaces": true,
+            "editor.minimap.enabled": false,
             "editor.rulers": [80, 100],
             "editor.tabSize": 2,
 
@@ -116,9 +118,7 @@
 
             "terminal.integrated.fontSize": 12,
 
-            "window.newWindowDimensions": "maximized",
-
-            "workbench.iconTheme": "vscode-icons"
+            "window.newWindowDimensions": "maximized"
           }
       
     - name: fix for https://github.com/Microsoft/vscode/issues/13799
