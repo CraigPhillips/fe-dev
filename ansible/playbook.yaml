@@ -88,7 +88,6 @@
             - "dbaeumer.vscode-eslint"
             - "chrmarti.regex"
             - "streetsidesoftware.code-spell-checker"
-            - "robertohuertasm.vscode-icons"
           visual_studio_code_settings: {
             "cSpell.userWords": [
               "amazonaws",
