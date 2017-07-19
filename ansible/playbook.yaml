@@ -120,6 +120,7 @@
             "extensions.autoUpdate": true,
 
             "files.eol": "\n",
+            "files.insertFinalNewline": true,
             "files.trimTrailingWhitespace": true,
 
             "terminal.integrated.fontSize": 12,
