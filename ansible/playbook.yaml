@@ -103,6 +103,8 @@
               "fullscreen",
               "gitignore",
               "gulpfile",
+              "injectable",
+              "inversify",
               "jmespath",
               "oris",
               "minimap",
