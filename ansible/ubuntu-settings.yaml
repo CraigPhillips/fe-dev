@@ -1,15 +1,30 @@
 ---
-- name: hide ubuntu launcher
+- become_user: vagrant
+  name: hide ubuntu launcher
   local_action: >
-    command gsettings set 
-    org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/ 
-    launcher-hide-mode 
+    command
+    dbus-launch
+    gsettings
+    set
+    org.compiz.unityshell:/org/compiz/profiles/unity/plugins/unityshell/
+    launcher-hide-mode
     1
 
-- name: disable ubuntu auto blackout
+- become_user: vagrant
+  name: disable ubuntu auto blackout
   local_action:
-    command gsettings set org.gnome.desktop.session idle-delay 0
+    command dbus-launch gsettings set org.gnome.desktop.session idle-delay 0
 
-- name: disable ubuntu autolock
+- become_user: vagrant
+  name: disable ubuntu autolock
   local_action: >
-    command gsettings set org.gnome.desktop.screensaver lock-enabled false
+    command
+    dbus-launch
+    gsettings
+    set
+    org.gnome.desktop.screensaver lock-enabled false
+
+- name: restart unity to consume new settings
+  service:
+    name: lightdm
+    state: restarted

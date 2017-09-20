@@ -1,13 +1,14 @@
 ---
-- hosts: all
-  pre_tasks:
-    - name: install required roles from ansible galaxy
-      become: true
-      local_action: command ansible-galaxy install -r required-roles.yaml
-
+- become: true
+  hosts: all
+  roles:
+    - cmprescott.chrome
+    - geerlingguy.nodejs
+    - kbrebanov.dkms
+    - ssilab.aws-cli
   tasks:
     - name: ubuntu settings
-      include: ubuntu-settings.yaml
+      include_tasks: ubuntu-settings.yaml
 
     - name: get status of copied in SSH key file
       register: ssh_key_status
@@ -37,13 +38,6 @@
       name: move AWS CLI credentials into place
       when: aws_settings_status.stat.exists
 
-    - name: install AWS CLI
-      become: true
-      include_role:
-        name: ypsman.aws-cli
-      static: no
-      when: aws_settings_status.stat.exists
-
     - copy:
         src: /tmp/.aws/config
         dest: /home/vagrant/.aws/config
@@ -52,35 +46,9 @@
       name: move AWS CLI config into place
       when: aws_settings_status.stat.exists
 
-    - name: install chrome
-      become: true
-      include_role:
-        name: cmprescott.chrome
-      static: no
-
-    - name: install dkms (guest-side part of time synching)
-      become: true
-      include_role:
-        name: kbrebanov.dkms
-      static: no
-      
-    - name: install node
-      become: true
-      include_role:
-        name: geerlingguy.nodejs
-      static: no
-
-    - name: install terminator
-      become: true
-      include_role:
-        name: vcabourdin.terminator
-      static: no
-
     - name: install visual studio
-      become: true
-      include_role: 
+      import_role: 
         name: gantsign.visual-studio-code
-      static: no
       vars:
         users:
         - username: vagrant
@@ -133,14 +101,12 @@
           }
       
     - name: fix for https://github.com/Microsoft/vscode/issues/13799
-      become: true
       lineinfile:
         dest: /usr/share/applications/code.desktop
         line: Exec=/usr/share/code/code --disable-gpu --unity-launch %U
         regexp: Exec=/usr/share/code/code --unity-launch %U
 
     - name: register github.com as a known host
-      become: true
       known_hosts:
         key: "{{ lookup('pipe', 'ssh-keyscan -t rsa github.com') }}"
         path: /etc/ssh/ssh_known_hosts
