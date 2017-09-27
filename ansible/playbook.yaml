@@ -81,7 +81,9 @@
               "prepper",
               "SCIO",
               "SDK's",
-              "serverless"
+              "serializers",
+              "serverless",
+              "vanillajs"
             ],
 
             "editor.autoClosingBrackets": false,
