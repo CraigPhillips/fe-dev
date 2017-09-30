@@ -3,5 +3,4 @@
 - src: gantsign.visual-studio-code
 - src: geerlingguy.nodejs
 - src: kbrebanov.dkms
-- src: vcabourdin.terminator
-- src: ypsman.aws-cli
+- src: ssilab.aws-cli

@@ -22,8 +22,8 @@ Vagrant.configure("2") do |config|
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
   
-  # Desktop Ubuntu 16.10 (Yakkety Yak)
-  config.vm.box = "boxcutter/ubuntu1610-desktop"
+  # Desktop Ubuntu 16.04.1 (Xenial Xerus, LTS - EoL: July 21, 2021)
+  config.vm.box = "box-cutter/ubuntu1604-desktop"
   config.vm.box_check_update = true
 
   # Parameters for the environment being created
@@ -50,7 +50,9 @@ Vagrant.configure("2") do |config|
 
   # Run Ansible from the Vagrant VM
   config.vm.provision "ansible_local" do |ansible|
+    ansible.galaxy_role_file = "required-roles.yaml"
     ansible.provisioning_path = "/vagrant/ansible"
     ansible.playbook = "playbook.yaml"
+    ansible.verbose = true
   end
 end
