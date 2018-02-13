@@ -1,6 +1,0 @@
-# Installs role for VS Code from Ansible Galaxy
-- src: cmprescott.chrome
-- src: gantsign.visual-studio-code
-- src: geerlingguy.nodejs
-- src: kbrebanov.dkms
-- src: ssilab.aws-cli
