@@ -1,1 +1,1 @@
-FROM node:carbon
+FROM node:latest
