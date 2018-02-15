@@ -1,1 +1,4 @@
-docker run --rm --volume ~/src:/src -it fe-dev bash
+docker run --rm \
+  -v ~/src:/src \
+  -v ~/.aws:/root/.aws \
+  -it fe-dev bash
