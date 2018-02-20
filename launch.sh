@@ -1,4 +1,6 @@
+echo $PWD
+
 docker run --rm \
-  -v ~/src:/src \
+  -v $PWD:/src \
   -v ~/.aws:/root/.aws \
   -it fe-dev bash
