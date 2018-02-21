@@ -1,1 +1,1 @@
-docker build -t fe-dev .
+docker build --no-cache -t fe-dev .
