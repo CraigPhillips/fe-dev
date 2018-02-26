@@ -49,6 +49,8 @@ export PS1="[\h] \[\e[33m\]\w\[\e[m\] \[\e[36;40m\]\`parse_git_branch\`\[\e[m\]:
 
 export PATH=~/.local/bin:$PATH
 
+cp host-home/.gitconfig /root/.gitconfig
+
 cd /src
 
 eval "$(ssh-agent)" > /dev/null
