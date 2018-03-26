@@ -41,3 +41,6 @@ fonts-liberation libappindicator1 libnss3 lsb-release xdg-utils wget
 RUN curl -O https://bootstrap.pypa.io/get-pip.py 2> /dev/null
 RUN apt-get install -y python-pip libpython-dev
 RUN pip install awscli
+
+# installs light-server for monitored static web content serving
+RUN npm install -g light-server

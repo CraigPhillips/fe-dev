@@ -57,3 +57,5 @@ cd /src
 
 eval "$(ssh-agent)" > /dev/null
 ssh-add 2> /dev/null
+
+chmod 700 -R /junk-drawer
