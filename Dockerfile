@@ -22,9 +22,9 @@ RUN apt-get install -y curl
 
 RUN apt-get install -y git
 
-# installs the most recent version of Node 9. 2> /dev/null is used to suppress
+# installs the most recent version of Node 10. 2> /dev/null is used to suppress
 # terminal output about download rates
-RUN curl -sL https://deb.nodesource.com/setup_9.x | bash - 2> /dev/null
+RUN curl -sL https://deb.nodesource.com/setup_10.x | bash - 2> /dev/null
 RUN apt-get install -y nodejs
 
 # dependencies for headless Chrome to function
