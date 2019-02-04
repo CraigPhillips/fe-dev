@@ -23,6 +23,5 @@ The `~/.aws/credentials` file should look like:
   [default]
   region = your-aws-region
   ```
-1. Run `vagrant plugin install vagrant-vbguest` which keeps Virtual Box Guest
-Additions up to date when running `vagrant up`
-8) Run `vagrant up`
+6. Run `build.sh` to assemble the docker container.
+1. From within the directory you want wanted into the container as your source directory, run `launch.sh`.
