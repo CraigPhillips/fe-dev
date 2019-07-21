@@ -33,7 +33,7 @@ RUN pip3 install awscli
 # installs the most recent version of Node 11 and the things it depends on. 2>
 # /dev/null is used to suppress terminal output about parsing apt-get keys
 RUN apt-get install -y gnupg2
-RUN curl -sL https://deb.nodesource.com/setup_11.x | bash - 2> /dev/null
+RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - 2> /dev/null
 RUN apt-get install -y nodejs
 
 # Puppeteer support
@@ -50,3 +50,5 @@ RUN apt-get update && apt-get install -y wget --no-install-recommends \
     && rm -rf /var/lib/apt/lists/* \
     && apt-get purge --auto-remove -y curl \
     && rm -rf /src/*.deb
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+RUN dpkg -i google-chrome-stable_current_amd64.deb; apt-get -fy install
